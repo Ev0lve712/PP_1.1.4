@@ -72,6 +72,7 @@ public class UserServiceTest {
             userService.dropUsersTable();
             userService.createUsersTable();
             userService.saveUser(testName, testLastName, testAge);
+
             List<User> userList = userService.getAllUsers();
 
             if (userList.size() != 1) {

@@ -1,17 +1,20 @@
 package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.Session;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Statement statement = Util.getConnection().createStatement();
-        UserDao userDao = new UserDaoJDBCImpl();
+        Session session = Util.getSession();
+        UserDao userDao = new UserDaoHibernateImpl();
 
         userDao.createUsersTable();
 
