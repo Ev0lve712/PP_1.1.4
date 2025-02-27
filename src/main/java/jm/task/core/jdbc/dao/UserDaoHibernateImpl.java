@@ -20,9 +20,15 @@ public class UserDaoHibernateImpl implements UserDao, cmdSQL {
             Transaction tx = session.beginTransaction();
 
             session.createSQLQuery(cmdSQL.CREATE_TABLES).executeUpdate();
-            tx.commit();
+            try {
+                tx.commit();
+            } catch (Exception e) {
+                tx.rollback();
+                e.printStackTrace();
+            }
 
         } catch (Exception e) {
+
             e.printStackTrace();
         }
     }
@@ -33,7 +39,12 @@ public class UserDaoHibernateImpl implements UserDao, cmdSQL {
             Transaction tx = session.beginTransaction();
 
             session.createSQLQuery(cmdSQL.DROP_TABLES).executeUpdate();
-            tx.commit();
+            try {
+                tx.commit();
+            } catch (Exception e) {
+                tx.rollback();
+                e.printStackTrace();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,7 +63,12 @@ public class UserDaoHibernateImpl implements UserDao, cmdSQL {
 
             session.save(user);
 
-            tx.commit();
+            try {
+                tx.commit();
+            } catch (Exception e) {
+                tx.rollback();
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,8 +86,12 @@ public class UserDaoHibernateImpl implements UserDao, cmdSQL {
             } else {
                 System.out.println("User not found");
             }
-
-            tx.commit();
+            try {
+                tx.commit();
+            } catch (Exception e) {
+                tx.rollback();
+                e.printStackTrace();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +124,13 @@ public class UserDaoHibernateImpl implements UserDao, cmdSQL {
             Transaction tx = session.beginTransaction();
 
             session.createSQLQuery(cmdSQL.CLEAN_TABLES).executeUpdate();
-            tx.commit();
+
+            try {
+                tx.commit();
+            } catch (Exception e) {
+                tx.rollback();
+                e.printStackTrace();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
