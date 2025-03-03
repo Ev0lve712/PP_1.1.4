@@ -38,6 +38,7 @@ public class UserDaoHibernateImpl implements UserDao, cmdSQL {
             session.createSQLQuery(cmdSQL.DROP_TABLES).executeUpdate();
             tx.commit();
         } catch (Exception e) {
+            tx.rollback();
             e.printStackTrace();
         }
     }
@@ -56,6 +57,7 @@ public class UserDaoHibernateImpl implements UserDao, cmdSQL {
             tx.commit();
 
         } catch (Exception e) {
+            tx.rollback();
             e.printStackTrace();
         }
     }
